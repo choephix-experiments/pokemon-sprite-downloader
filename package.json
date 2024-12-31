@@ -1,0 +1,9 @@
+{
+  "name": "pokemon-sprite-downloader",
+  "private": true,
+  "main": "src/main.js",
+  "scripts": {
+    "download-art": "node src/main.js",
+    "simplify-rip": "node src/simplify-rip.js"
+  }
+}
