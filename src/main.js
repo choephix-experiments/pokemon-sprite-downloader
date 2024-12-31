@@ -6,7 +6,7 @@ const offset = 0;
 
 const downloadDirBase = './downloads';
 const downloadDir = downloadDirBase + '/pokemon-official-artwork';
-const concurrency = 6;
+const concurrency = 12;
 
 // Ensure the download directory exists
 if (!fs.existsSync(downloadDir)) {
