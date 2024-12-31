@@ -1,6 +1,8 @@
-const all = require('./all.json');
 const fs = require('fs');
 const path = require('path');
+
+const limit = 10;
+const offset = 0;
 
 const downloadDirBase = './downloads';
 const downloadDir = downloadDirBase + '/pokemon-official-artwork';
@@ -11,7 +13,7 @@ if (!fs.existsSync(downloadDir)) {
   fs.mkdirSync(downloadDir, { recursive: true });
 }
 
-const pokemonJsons = []
+const pokemonJsons = [];
 
 const downloadImage = async pokemon => {
   const res = await fetch(pokemon.url);
@@ -41,6 +43,8 @@ const worker = async queue => {
 };
 
 const main = async () => {
+  const res = await fetch(`https://pokeapi.co/api/v2/pokemon?limit=${limit}&offset=${offset}`);
+  const all = await res.json();
   const queue = [...all.results];
   const workers = Array(concurrency)
     .fill(null)
