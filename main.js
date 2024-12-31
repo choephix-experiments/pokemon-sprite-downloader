@@ -1,7 +1,7 @@
 const fs = require('fs');
 const path = require('path');
 
-const limit = 10;
+const limit = 10000;
 const offset = 0;
 
 const downloadDirBase = './downloads';
