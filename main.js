@@ -2,7 +2,8 @@ const all = require('./all.json');
 const fs = require('fs');
 const path = require('path');
 
-const downloadDir = './downloads/pokemon-official-artwork';
+const downloadDirBase = './downloads';
+const downloadDir = downloadDirBase + '/pokemon-official-artwork';
 const concurrency = 6;
 
 // Ensure the download directory exists
@@ -46,7 +47,7 @@ const main = async () => {
     .map(() => worker(queue));
   await Promise.all(workers);
 
-  const jsonFilePath = path.join(downloadDir, 'rip.json');
+  const jsonFilePath = path.join(downloadDirBase, 'rip.json');
   fs.writeFileSync(jsonFilePath, JSON.stringify(pokemonJsons, null, 2));
   console.log(`Saved JSON to ${jsonFilePath}`);
 };
