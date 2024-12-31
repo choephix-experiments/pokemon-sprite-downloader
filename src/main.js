@@ -8,6 +8,8 @@ const downloadDirBase = './downloads';
 const downloadDir = downloadDirBase + '/pokemon-official-artwork';
 const concurrency = 12;
 
+const shouldSaveAllResultsInOneBigJSON = false;
+
 // Ensure the download directory exists
 if (!fs.existsSync(downloadDir)) {
   fs.mkdirSync(downloadDir, { recursive: true });
@@ -30,7 +32,9 @@ const downloadImage = async pokemon => {
     console.log(`Downloaded ${pokemon.name} to ${fileName}`);
   }
 
-  pokemonJsons.push(json);
+  if (shouldSaveAllResultsInOneBigJSON) {
+    pokemonJsons.push(json);
+  }
 };
 
 const worker = async queue => {
@@ -51,9 +55,11 @@ const main = async () => {
     .map(() => worker(queue));
   await Promise.all(workers);
 
-  const jsonFilePath = path.join(downloadDirBase, 'rip.json');
-  fs.writeFileSync(jsonFilePath, JSON.stringify(pokemonJsons, null, 2));
-  console.log(`Saved JSON to ${jsonFilePath}`);
+  if (shouldSaveAllResultsInOneBigJSON) {
+    const jsonFilePath = path.join(downloadDirBase, 'rip.json');
+    fs.writeFileSync(jsonFilePath, JSON.stringify(pokemonJsons, null, 2));
+    console.log(`Saved JSON to ${jsonFilePath}`);
+  }
 };
 
 main();
