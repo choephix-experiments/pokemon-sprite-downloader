@@ -30,3 +30,7 @@ You can configure the following parameters in `src/main.js`:
 - `downloadDirBase`: The base directory for downloads.
 - `concurrency`: The number of concurrent downloads.
 - `shouldSaveAllResultsInOneBigJSON`: Whether to save all results in one big JSON file.
+
+## Credits
+
+This project uses the [PokeAPI](https://pokeapi.co), an insanely awesome API for Pokemon data.
